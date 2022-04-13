@@ -44,6 +44,7 @@ class Pagy # :nodoc:
         vars                 = pagy_meilisearch_get_vars(nil, vars)
         options[:limit]      = vars[:items]
         options[:offset]     = (vars[:page] - 1) * vars[:items]
+        options[:hitsPerPage]= vars[:items]
         results              = model.send(DEFAULT[:meilisearch_search], term, **options)
         vars[:count]         = results.raw_answer['nbHits']
         pagy                 = ::Pagy.new(vars)
